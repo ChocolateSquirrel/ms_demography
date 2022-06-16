@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Mise à jour des informations du patient</title>
 </head>
+
 <body>
-$END$
+<h1>Mise à jour des informations pour le patient avec pour id : <span th:text="${patient.patientId}"></span></h1>
+    <form method="post" >
+        <div th:action="@{/update}" th:object="${updateForm}">
+            <div class="nom">
+                <label for="lastName">NOM : </label>
+                <<input type="text" required="true" name="lastName" id="lastName"
+                        placeholder="Ex : Sherlock"
+                        th:field="*{lastName}"/>
+            </div>
+            <div class="prenom">
+                <label for="firstName">Prénom : </label>
+                <<input type="text" required="true" name="firstName" id="firstName"
+                        placeholder="Ex : Sherlock"
+                        th:field="*{firstName}"/>
+            </div>
+            <div class="dateNaissance">
+                <label for="dob">Date de naissance : </label>
+                <input type="text" required="true" name="dob" id="dob" placeholder="Ex : 2020-07-31"  th:field="*{dateOfBirth}"/>
+            </div>
+            <div class="sexe">
+                <label for="sex">Sexe : </label>
+                <input type="sex" required="true" name="sex" id="sex" th:field="*{sex}"/>
+            </div>
+            <div class="adresse">
+                <label for="address">Adresse : </label>
+                <input type="text" required="true" name="address" id="address" th:field="*{address}"/>
+            </div>
+            <div class="telephone">
+                <label for="phone">Numéro de téléphone : </label>
+                <input type="text" required="true" name="phone" id="phone" th:field="*{phone}"/>
+            </div>
+            <div class="creation">
+                <button type="submit" class="btn btn-primary">Mise à jour des informations</button>
+            </div>
+    </form>
 </body>
 </html>

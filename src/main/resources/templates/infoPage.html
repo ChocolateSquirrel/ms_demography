@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Patient information</title>
 </head>
+
 <body>
-$END$
+<h1>Informations du patient :</h1>
+    <div th:object="${patient}">
+        <p>Nom : <span th:text="${patient.firstName}"></span></p>
+        <p>Prénom : <span th:text="${patient.lastName}"></span></p>
+        <p>Date de naissance : <span th:text="${patient.dateOfBirth}"></span></p>
+        <p>Sex : <span th:text="${patient.sex}"></span></p>
+        <p>Adresse postale : <span th:text="${patient.address}"></span></p>
+        <p>Numero de téléphone : <span th:text="${patient.phone}"></span></p>
+    </div>
+    <div>
+        <a th:href="@{/update}"><button class="btn btn-primary" type="submit"> Mettre à jour les infos </button></a>
+    </div>
+
+
+
 </body>
 </html>

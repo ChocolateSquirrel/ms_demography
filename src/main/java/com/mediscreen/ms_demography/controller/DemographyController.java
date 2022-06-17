@@ -1,15 +1,13 @@
 package com.mediscreen.ms_demography.controller;
 
-import com.mediscreen.ms_demography.commandobject.UpdateForm;
 import com.mediscreen.ms_demography.model.Patient;
 import com.mediscreen.ms_demography.service.DemographyService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("patients")
 public class DemographyController {
 
     private final DemographyService demographyService;
@@ -19,39 +17,34 @@ public class DemographyController {
     }
 
     @GetMapping("/")
-    public ModelAndView getAllPatients(Model model){
-        List<Patient> patientsList = demographyService.getAllPatients();
-        model.addAttribute("patients", patientsList);
-        return new ModelAndView("allPatientsPage");
+    public List<Patient> getAllPatients() {
+        return demographyService.getAllPatients();
     }
 
-    @PostMapping("/addPatient")
-    public Patient addPatient(@RequestParam String prenom, @RequestParam String nom, @RequestParam String dob, @RequestParam String sex,
+    @GetMapping("/{id}")
+    public Patient getPatient(@PathVariable(value = "id") int patientId) {
+        return demographyService.getPatient(patientId);
+    }
+
+    @PostMapping("/")
+    public Patient addPatient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String dob, @RequestParam String sex,
                               @RequestParam String address, @RequestParam String phone){
-        Patient patient = new Patient(prenom, nom, dob, sex, address, phone);
+        Patient patient = new Patient(firstName, lastName, dob, sex, address, phone);
         return demographyService.addPatient(patient);
     }
 
-    @GetMapping("/getPatientInfo")
-    public ModelAndView getPatientInfo(@RequestParam int patientId, Model model){
-        Patient patient = demographyService.getPatient(patientId);
-        model.addAttribute("patient", patient);
-        return new ModelAndView("infoPage");
+    @PutMapping("/{id}")
+    public Patient updatePatientInfo(@PathVariable(value = "id") int patientId, @RequestBody Patient patient){
+        Patient patientUpdated = demographyService.updatePatient(patientId, patient);
+        return patientUpdated;
     }
 
-    @GetMapping("/update")
-    public ModelAndView showUpdateForm(@RequestParam int patientId, Model model){
-        Patient patient = demographyService.getPatient(patientId);
-        model.addAttribute("patient", patient);
-        return new ModelAndView("updateInfoPage", "updateForm", new UpdateForm());
+    @DeleteMapping("/{id}")
+    public Patient delete(@PathVariable(value = "id") int patientId) {
+        Patient patientDeleted = demographyService.deletePatient(patientId);
+        return patientDeleted;
     }
 
-    @PostMapping("/update")
-    public ModelAndView updatePatientInfo(@ModelAttribute UpdateForm updateForm, Model model){
-        Patient patient = demographyService.updatePatient(updateForm);
-        model.addAttribute("patient", patient);
-        return new ModelAndView("/", "updateForm", new UpdateForm());
-    }
 
 
 }

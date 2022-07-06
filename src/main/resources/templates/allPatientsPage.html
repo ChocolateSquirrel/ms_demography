@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+
+<body>
+<div th:object="${patient}">
+        <div class="title">
+            <h1>Tous mes patients</h1>
+        </div>
+        <table class="table table-striped">
+            <thead class="thead-light text-align-center">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col">Sexe</th>
+                <th scope="col">Adresse postale</th>
+                <th scope="col">Numéro de téléphone</th>
+            </tr>
+            </thead>
+            <tbody class="text-align-center">
+            <tr th:if="${patients.empty}">
+                <td colspan="4">Pas encore de patients enregistrés</td>
+            </tr>
+            <tr class="oneRow text-align-center" th:each="patient : ${patients}">
+                <td><span th:text="${patient.lastName}"></span></p></td>
+                <td><span th:text="${patient.firstName}"></span></p></td>
+                <td><span th:text="${patient.dateOfBirth}"></span></p></td>
+                <td><span th:text="${patient.sex}"></span></p></td>
+                <td><span th:text="${patient.address}"></span></p></td>
+                <td><span th:text="${patient.phone}"></span></p></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

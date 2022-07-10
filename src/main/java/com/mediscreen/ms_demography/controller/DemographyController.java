@@ -1,6 +1,7 @@
 package com.mediscreen.ms_demography.controller;
 
 import com.mediscreen.ms_demography.model.Patient;
+import com.mediscreen.ms_demography.model.Sex;
 import com.mediscreen.ms_demography.service.DemographyService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class DemographyController {
     @PostMapping("/")
     public Patient addPatient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String dob, @RequestParam String sex,
                               @RequestParam String address, @RequestParam String phone){
-        Patient patient = new Patient(firstName, lastName, dob, sex, address, phone);
+        Patient patient = new Patient(firstName, lastName, dob, Sex.valueOf(sex), address, phone);
         return demographyService.addPatient(patient);
     }
 

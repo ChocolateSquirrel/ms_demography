@@ -28,7 +28,7 @@ public class DemographyService {
         return patientRepository.findAll();
     }
 
-    public Patient updatePatient (int patientId, Patient patient) {
+    public Patient updatePatient(int patientId, Patient patient) {
         Patient patientToUpdate = patientRepository.findById(patientId).orElseThrow(() -> new PatientNotFoundException(patientId));
 
         patientToUpdate.setLastName(patient.getLastName());
@@ -42,7 +42,7 @@ public class DemographyService {
         return patientToUpdate;
     }
 
-    public Patient deletePatient (int patientId){
+    public Patient deletePatient(int patientId){
         Patient patientToDelete = patientRepository.findById(patientId).orElseThrow(() -> new PatientNotFoundException(patientId));
         patientRepository.delete(patientToDelete);
         return patientToDelete;

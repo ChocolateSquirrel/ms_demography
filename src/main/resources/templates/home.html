@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="menu" th:replace="bandeau"></div>
+
+    <div class="row" id="add_Patient">
+        <a th:href="@{/view/patients/add}"><button class="btn btn-primary">Add patient</button></a>
+    </div>
+
+    <div class="row" id="list_Patient">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Date of birth</th>
+                <th>Sex</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${patients.empty}">
+                <td>No patient</td>
+            </tr>
+            <tr th:each="patient : ${patients}">
+                <th style="width: 10%" th:text="${patient.patientId}"></th>
+                <th th:text="${patient.firstName}"></th>
+                <th th:text="${patient.lastName}"></th>
+                <th th:text="${patient.dateOfBirth}"></th>
+                <th th:text="${patient.sex.abbreviation}"></th>
+                <th th:text="${patient.address}"></th>
+                <th th:text="${patient.phone}"></th>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/view/patients/{id}(id=${patient.patientId})}">Show</a>&nbsp;|&nbsp;
+                    <a th:href="@{/view/patients/update/{id}(id=${patient.patientId})}">Edit</a>&nbsp;|
+                    <a th:href="@{/view/patients/delete/{id}(id=${patient.patientId})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

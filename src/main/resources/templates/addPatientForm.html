@@ -2,24 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mise à jour des informations du patient</title>
+    <title>Ajout d'un patient</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 </head>
 
 <body>
-    <div id="menu" th:replace="bandeau"></div>
-    <h2>Mise à jour des informations pour le patient avec pour id : <span th:text="${patient.patientId}"></span></h2>
-    <form method="post"  th:action="@{/view/patients/update/{id}(id=${patient.patientId}}" th:object="${form}">
+<div id="menu" th:replace="bandeau"></div>
+
+<form method="post" th:action="@{/view/patients/}" th:object="${form}">
         <div class="nom">
             <label for="lastName">Last Name : </label>
             <input type="text" required="true" name="lastName" id="lastName"
-                   placeholder="Ex : Sherlock"
-                   th:field="*{lastName}"/>
+                    placeholder="Ex : Sherlock"
+                    th:field="*{lastName}"/>
         </div>
         <div class="prenom">
             <label for="firstName">First Name : </label>
             <input type="text" required="true" name="firstName" id="firstName"
-                   placeholder="Ex : Sherlock"
-                   th:field="*{firstName}"/>
+                    placeholder="Ex : Sherlock"
+                    th:field="*{firstName}"/>
         </div>
         <div class="dateNaissance">
             <label for="dob">Date of Birth : </label>
@@ -43,9 +44,14 @@
             <label for="phone">Phone number : </label>
             <input type="text" name="phone" id="phone" th:field="*{phone}"/>
         </div>
-            <div class="creation">
-                <button type="submit" class="btn btn-primary">Mise à jour des informations</button>
-            </div>
-    </form>
+        <div class="creation">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+</form>
+
+<div class="row" id="Return">
+    <a th:href="@{/view/patients/}"><button class="btn btn-primary">Return</button></a>
+</div>
+
 </body>
 </html>

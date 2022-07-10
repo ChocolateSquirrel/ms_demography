@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.servlet.annotation.MultipartConfig;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -17,16 +19,21 @@ public class Patient {
     private int patientId;
 
     @Column(name = "prenom")
+    @NotBlank
     private String firstName;
 
     @Column(name = "nom")
+    @NotBlank
     private String lastName;
 
     @Column(name = "dob")
+    @NotBlank
     private String dateOfBirth;
 
     @Column(name = "sex")
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Sex sex;
 
     @Column(name = "address")
     private String address;
@@ -36,7 +43,7 @@ public class Patient {
 
     public Patient() { }
 
-    public Patient(String firstName, String lastName, String dateOfBirth, String sex, String address, String phone) {
+    public Patient(String firstName, String lastName, String dateOfBirth, Sex sex, String address, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -44,4 +51,5 @@ public class Patient {
         this.address = address;
         this.phone = phone;
     }
+
 }

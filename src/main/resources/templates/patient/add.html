@@ -9,23 +9,26 @@
 <body>
 <div id="menu" th:replace="bandeau"></div>
 
-<form method="post" th:action="@{/view/patients/}" th:object="${form}">
+<form method="post" th:action="@{/view/patients/}" th:object="${patient}">
         <div class="nom">
             <label for="lastName">Last Name : </label>
             <input type="text" required="true" name="lastName" id="lastName"
                     placeholder="Ex : Sherlock"
                     th:field="*{lastName}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
         </div>
         <div class="prenom">
             <label for="firstName">First Name : </label>
             <input type="text" required="true" name="firstName" id="firstName"
                     placeholder="Ex : Sherlock"
                     th:field="*{firstName}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
         </div>
         <div class="dateNaissance">
-            <label for="dob">Date of Birth : </label>
+            <label for="dateOfBirth">Date of Birth : </label>
             <input type="text"
-                   required="true" name="dob" id="dob" placeholder="Ex : YYYY-MM-DD"  th:field="*{dateOfBirth}"/>
+                   required="true" name="dateOfBirth" id="dateOfBirth" placeholder="Ex : YYYY-MM-DD"  th:field="*{dateOfBirth}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
         </div>
         <div class="sexe">
             <label for="sex">Sex : </label>
@@ -35,14 +38,17 @@
                         th:text="${s.abbreviation}">
                 </option>
             </select>
+            <p class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></p>
         </div>
         <div class="adresse">
             <label for="address">Addresse : </label>
             <input type="text" name="address" id="address" th:field="*{address}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
         </div>
         <div class="telephone">
             <label for="phone">Phone number : </label>
             <input type="text" name="phone" id="phone" th:field="*{phone}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
         </div>
         <div class="creation">
             <button type="submit" class="btn btn-primary">Add</button>

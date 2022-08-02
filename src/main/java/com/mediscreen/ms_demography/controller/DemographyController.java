@@ -27,20 +27,19 @@ public class DemographyController {
         return demographyService.getPatient(patientId);
     }
 
-    @PostMapping("/")
-    public Patient addPatient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String dob, @RequestParam String sex,
-                              @RequestParam String address, @RequestParam String phone){
-        Patient patient = new Patient(firstName, lastName, dob, Sex.valueOf(sex), address, phone);
+
+    @PostMapping("/add")
+    public Patient addPatient(@RequestBody Patient patient){
         return demographyService.addPatient(patient);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/update/{id}")
     public Patient updatePatientInfo(@PathVariable(value = "id") int patientId, @RequestBody Patient patient){
         Patient patientUpdated = demographyService.updatePatient(patientId, patient);
         return patientUpdated;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public Patient delete(@PathVariable(value = "id") int patientId) {
         Patient patientDeleted = demographyService.deletePatient(patientId);
         return patientDeleted;

@@ -6,12 +6,14 @@ import javax.persistence.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "patient")
 public class Patient {
+    private static final String BIRTHDATE_PATTERN = "yyyy-MM-dd";
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -28,6 +30,7 @@ public class Patient {
 
     @Column(name = "dob")
     @NotBlank
+    @Pattern(regexp = "^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$")
     private String dateOfBirth;
 
     @Column(name = "sex")

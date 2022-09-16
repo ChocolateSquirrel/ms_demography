@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>Ajout d'un patient</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/add.css">
 </head>
 
 <body>
 <div id="menu" th:replace="bandeau"></div>
+<div id="title"><h2>Add a patient</span></h2></div>
 
-<form method="post" th:action="@{/view/patients/}" th:object="${patient}">
+<div id="page">
+<form id="form" method="post" th:action="@{/view/patients/}" th:object="${patient}">
         <div class="nom">
             <label for="lastName">Last Name : </label>
             <input type="text" required="true" name="lastName" id="lastName"
@@ -26,7 +29,7 @@
         </div>
         <div class="dateNaissance">
             <label for="dateOfBirth">Date of Birth : </label>
-            <input type="text"
+            <input type="text" pattern="^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$"
                    required="true" name="dateOfBirth" id="dateOfBirth" placeholder="Ex : YYYY-MM-DD"  th:field="*{dateOfBirth}"/>
             <p class="text-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
         </div>
@@ -55,9 +58,9 @@
         </div>
 </form>
 
-<div class="row" id="Return">
+<div class="row" id="return" style="margin:auto">
     <a th:href="@{/view/patients/}"><button class="btn btn-primary">Return</button></a>
 </div>
-
+</div>
 </body>
 </html>

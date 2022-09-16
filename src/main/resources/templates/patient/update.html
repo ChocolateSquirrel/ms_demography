@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Mise à jour des informations du patient</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/update.css">
 </head>
 
 <body>
     <div id="menu" th:replace="bandeau"></div>
-    <h2>Mise à jour des informations pour le patient avec pour id : <span th:text="${patient.patientId}"></span></h2>
+    <div id="title">
+        <h2>Update information for: <span th:text="${patient.firstName}"/> <span th:text="${patient.lastName}"/></h2>
+    </div>
+
+    <div id="page">
     <form method="post"  th:action="@{/view/patients/update/{id}(id=${patient.patientId})}" th:object="${patient}">
         <div class="nom">
             <label for="lastName">Last Name : </label>
@@ -23,7 +29,7 @@
         </div>
         <div class="dateNaissance">
             <label for="dateOfBirth">Date of Birth : </label>
-            <input type="text"
+            <input type="text" pattern="^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$"
                    required="true" name="dateOfBirth" id="dateOfBirth"  th:field="*{dateOfBirth}"/>
             <p class="text-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
         </div>
@@ -48,8 +54,12 @@
             <p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
         </div>
             <div class="creation">
-                <button type="submit" class="btn btn-primary">Mise à jour des informations</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
     </form>
+    <div id="return" style="margin:auto">
+        <a th:href="@{/view/patients/}"><button class="btn btn-primary">Return</button></a>
+    </div>
+    </div>
 </body>
 </html>

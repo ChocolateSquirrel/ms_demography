@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <title>Mediscreen</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
 
 <body>
     <div id="menu" th:replace="bandeau"></div>
 
+    <div class="container" id="page">
     <div class="row" id="add_Patient">
         <a th:href="@{/view/patients/add}"><button class="btn btn-primary">Add patient</button></a>
     </div>
@@ -17,7 +19,7 @@
     <div class="row" id="list_Patient">
         <table class="table table-bordered">
             <thead>
-            <tr>
+            <tr style="text-align:center">
                 <th>Id</th>
                 <th>FirstName</th>
                 <th>LastName</th>
@@ -25,7 +27,6 @@
                 <th>Sex</th>
                 <th>Address</th>
                 <th>Phone</th>
-
                 <th>Actions</th>
             </tr>
             </thead>
@@ -35,12 +36,12 @@
             </tr>
             <tr th:each="patient : ${patients}">
                 <th style="width: 10%" th:text="${patient.patientId}"></th>
-                <th th:text="${patient.firstName}"></th>
-                <th th:text="${patient.lastName}"></th>
-                <th th:text="${patient.dateOfBirth}"></th>
-                <th th:text="${patient.sex.abbreviation}"></th>
-                <th th:text="${patient.address}"></th>
-                <th th:text="${patient.phone}"></th>
+                <th th:text="${patient.firstName}" style="font-weight:lighter"></th>
+                <th th:text="${patient.lastName}" style="font-weight:lighter"></th>
+                <th th:text="${patient.dateOfBirth}" style="font-weight:lighter"></th>
+                <th th:text="${patient.sex.abbreviation}" style="font-weight:lighter"></th>
+                <th th:text="${patient.address}" style="font-weight:lighter"></th>
+                <th th:text="${patient.phone}" style="font-weight:lighter"></th>
                 <td style="width: 15%" class="text-center">
                     <a th:href="@{/view/patients/{id}(id=${patient.patientId})}">Show</a>&nbsp;|&nbsp;
                     <a th:href="@{/view/patients/update/{id}(id=${patient.patientId})}">Edit</a>&nbsp;|
@@ -50,6 +51,6 @@
             </tbody>
         </table>
     </div>
-
+    </div>
 </body>
 </html>

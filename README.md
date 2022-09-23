@@ -1,4 +1,4 @@
-#Mediscreen
+# Mediscreen
 Mediscreen is an application used by doctors to detect patients at risk of developing diabetes.  
 From some information (like age, sex...) and the historic (notes) of the patient, this application can generate
 a report. 4 risk levels are used:
